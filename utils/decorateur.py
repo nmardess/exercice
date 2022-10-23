@@ -1,5 +1,6 @@
 from functools import wraps
 
+
 def cosmetique(cosmetique_name):
     def cosmetique_decorator(func):
         @wraps(func)

@@ -8,7 +8,8 @@ def nettoyage_caracteres(chaine: str) -> int:
                     entier (int): Entier contenu dans la chaine de caractères.
     '''
     entier = ''.join(filter(str.isdigit, chaine))
-    return int(entier)
+    return int(entier) if entier != "" else None
+
 
 def eval_operation(operation: str) -> int:
     '''
@@ -21,21 +22,23 @@ def eval_operation(operation: str) -> int:
     '''
     try:
         resultat = int(eval(operation))
-    except:
-        print(f"Une erreur s'est produite lors de l'évaluation de l'opération: {operation}")
+    except Exception:
+        print(f"Une erreur s'est produite lors de l'évaluation de l'opération:"
+              f" {operation}")
     else:
         return resultat
 
+
 def resultat_ligne(operation: str) -> str:
     '''
-    Résultat de la ligne à calculer, si c'est possible avec le détail de l'opération
-    qui a permis ce calcul.
+    Résultat de la ligne à calculer, si c'est possible avec le détail de
+    l'opération qui a permis ce calcul.
 
             Parameters:
                     operation (str): Chaine de caractères provenant du fichier.
             Returns:
-                    resultat (str): Chaine de caractères précisant l'opération, son résultat
-                                    et le détail du calcul.
+                    resultat (str): Chaine de caractères précisant l'opération,
+                                    son résultat et le détail du calcul.
     '''
     liste = operation.split()
     if len(liste) == 3:
@@ -43,16 +46,18 @@ def resultat_ligne(operation: str) -> str:
             operande1 = nettoyage_caracteres(liste[0])
             operator = liste[1]
             operande2 = nettoyage_caracteres(liste[2])
-            evaluation = eval_operation(str(operande1)+ str(operator)+ str(operande2))
+            evaluation = eval_operation(str(operande1) + str(operator) +
+                                        str(operande2))
             if evaluation:
-                resultat = (f"Opération possible : {operation.strip()} ==> " \
-                        f" {str(operande1)} {str(operator)} {str(operande2)} = {evaluation}")
+                resultat = (f"Opération possible : {operation.strip()} ==> "
+                            f" {str(operande1)} {str(operator)} "
+                            f"{str(operande2)} = {evaluation}")
             else:
                 resultat = (f"Opération impossible : {operation.strip()}")
-        except:
-            print(f"Une autre erreur est survenue avec l'opération {operation.strip()}")
+        except Exception:
+            print(f"Une autre erreur est survenue avec l'opération "
+                  f"{operation.strip()}")
         else:
             return resultat
-    else :
-        return(f"Opération impossible : {operation.strip()}")
-        
+    else:
+        return (f"Opération impossible : {operation.strip()}")
