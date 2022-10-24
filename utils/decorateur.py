@@ -8,7 +8,8 @@ def cosmetique(cosmetique_name):
             print("|-------------------------|")
             print(f"|{cosmetique_name.center(25)}|")
             print("|-------------------------|")
-            func(*args, **kwargs)
+            f = func(*args, **kwargs)
             print("|-------------------------|")
+            return f
         return func_wrapper
     return cosmetique_decorator
