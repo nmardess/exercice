@@ -3,3 +3,4 @@ utils/__pycache__/
 tests/__pycache__/
 .coverage
 __pycache__/
+coverage.xml
